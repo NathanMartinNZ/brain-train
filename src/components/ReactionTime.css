@@ -1,0 +1,27 @@
+.reaction-time {
+  cursor: pointer;
+}
+
+.reaction-time > div {
+  display: grid;
+  align-items: center;
+  text-align: center;
+  padding: 80px;
+  min-height: 400px;
+  width: 100%;
+  background: #3d405b;
+}
+
+@media (max-width: 576px) {
+  .reaction-time > div {
+    padding: 20px;
+  }
+}
+
+.reaction-time .before-time {
+  background: #e07a5f;
+}
+
+.reaction-time .after-time {
+  background: #81b29a;
+}
