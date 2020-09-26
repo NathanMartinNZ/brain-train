@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div className="container-fluid mt-5">
+      <div className="container-fluid mt-3">
         <ReactionTime />
       </div>
     </div>

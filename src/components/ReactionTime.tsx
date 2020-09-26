@@ -51,16 +51,29 @@ function ReactionTime() {
     }
   };
 
+  // Calculate score
   const score = () => {
     return new Date().valueOf() - clickTime.valueOf();
   };
+
+  // Save entries in local storage
+  if (score() > 0) {
+    const reactionTimes = window.localStorage.getItem("reactionTimes");
+    if (reactionTimes && score() > 10) {
+      const storedEntries = JSON.parse(reactionTimes);
+      storedEntries[new Date().valueOf()] = score();
+      window.localStorage.setItem("reactionTimes", JSON.stringify(storedEntries));
+    } else if (!reactionTimes && score() > 10) {
+      window.localStorage.setItem("reactionTimes", JSON.stringify({}));
+    }
+  }
 
   return (
     <div className="reaction-time" onClick={() => handleClick(gameStatus)}>
       {gameStatus === "ready" && (
         <div>
-          <h2 className="display-4 text-light">Click as soon as the red box turns green.</h2>
-          <h2 className="h3 text-light">Click anywhere to start.</h2>
+          <h2 className="display-4 text-light">Click as soon as the red box turns green</h2>
+          <h2 className="h3 text-light">Click anywhere to start</h2>
         </div>
       )}
 
@@ -81,10 +94,10 @@ function ReactionTime() {
               <h2 className="display-4 text-light">
                 <b>{score()}</b>ms
               </h2>
-              <h3 className="h3 text-light">Click to keep going</h3>
+              <h3 className="h3 text-light">Click to try again</h3>
             </>
           ) : (
-            <h2 className="display-4 text-light">Clicked too soon.</h2>
+            <h2 className="display-4 text-light">Clicked too soon</h2>
           )}
         </div>
       )}
