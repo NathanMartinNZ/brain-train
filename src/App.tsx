@@ -1,9 +1,12 @@
 import React from "react";
+import ReactionTime from "./components/ReactionTime";
 
 function App() {
   return (
     <div className="App">
-      <div>Hello</div>
+      <div>
+        <ReactionTime />
+      </div>
     </div>
   );
 }
