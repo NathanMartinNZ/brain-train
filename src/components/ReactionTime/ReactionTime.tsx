@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { clear } from "console";
+import React, { useState, useEffect } from "react";
+import { updateJsxSelfClosingElement } from "typescript";
 import "./ReactionTime.css";
 
 const initialDateState = () => {
@@ -9,18 +11,29 @@ const initialDateState = () => {
 
 const liveTimeouts: Array<NodeJS.Timeout> = [];
 
-function ReactionTime() {
+const clearLiveTimeouts = () => {
+  liveTimeouts.forEach((t, i, obj) => {
+    clearTimeout(t);
+    obj.splice(i, 1);
+  });
+};
+
+const ReactionTime: React.FC = () => {
   const [gameStatus, setGameStatus] = useState("ready");
   const [clickTime, setClickTime] = useState(initialDateState());
   const [afterTime, setAfterTime] = useState(false);
 
+  useEffect(() => {
+    return () => {
+      // Clear timeout if unmounted while a timeout is running
+      clearLiveTimeouts();
+    };
+  }, []);
+
   const handleClick = (gameStatus: string) => {
     const startGame = () => {
       // Clear previous timeouts
-      liveTimeouts.forEach((t, i, obj) => {
-        clearTimeout(t);
-        obj.splice(i, 1);
-      });
+      clearLiveTimeouts();
 
       // Set initial date to tomorrow (to figure out if click was before or after trigger time)
       setClickTime(initialDateState());
@@ -53,7 +66,7 @@ function ReactionTime() {
 
   // Calculate score
   const score = () => {
-    return new Date().valueOf() - clickTime.valueOf();
+    return new Date().valueOf() - clickTime.valueOf() - 70;
   };
 
   // Save entries in local storage
@@ -103,6 +116,6 @@ function ReactionTime() {
       )}
     </div>
   );
-}
+};
 
 export default ReactionTime;

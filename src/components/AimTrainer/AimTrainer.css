@@ -1,0 +1,23 @@
+/* .aim-trainer {
+  display: grid;
+  align-items: center;
+  text-align: center;
+  padding: 80px;
+  min-height: 400px;
+  width: 100%;
+  background: #3d405b;
+} */
+
+.aim-trainer {
+  position: absolute;
+  min-height: 400px;
+  width: 100%;
+  background: #3d405b;
+}
+
+.aim-trainer > .target {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background: white;
+}

@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function Header() {
+const Header: React.FC = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="/">
+      <Link to="/" className="navbar-brand">
         Brain Train
-      </a>
+      </Link>
     </nav>
   );
-}
+};
 
 export default Header;
